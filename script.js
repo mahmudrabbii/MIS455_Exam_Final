@@ -17,7 +17,7 @@ function connect() {
 function process(data) {
     var allMeals = data.meals; 
     var oldContent = document.getElementById("displayArea");
-    oldContent.innerHTML = ""; 
+    oldContent.innerHTML = ""; // Clear previous results
 
     if (!allMeals) {
         oldContent.innerHTML = `<p>No meals found for the given search term. Please try again.</p>`;
@@ -40,4 +40,27 @@ function process(data) {
         oldContent.appendChild(newDiv);
     }
 
+    // Add "SHOW ALL" button if more than 5 meals are available
+    if (allMeals.length > 5) {
+        var showAllBtn = document.createElement("button");
+        showAllBtn.textContent = "SHOW ALL";
+        showAllBtn.onclick = function() {
+            oldContent.innerHTML = ""; // Clear previous results
+            allMeals.forEach((meal) => {
+                var newDiv = document.createElement("div");
+                newDiv.classList.add("meal-card");
+                newDiv.innerHTML = `
+                    <strong>Meal Title:</strong> ${meal.strMeal} <br>
+                    <strong>ID:</strong> ${meal.idMeal} <br>
+                    <img src="${meal.strMealThumb}" alt="${meal.strMeal}"> <br>
+                    <strong>Cooking Instructions:</strong> <br>
+                    <div class="meal-instructions">
+                        ${meal.strInstructions}
+                    </div>
+                `;
+                oldContent.appendChild(newDiv);
+            });
+        };
+        oldContent.appendChild(showAllBtn);
+    }
 }
