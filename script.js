@@ -14,5 +14,30 @@ function connect() {
     .then(data => process(data));
 }
 
+function process(data) {
+    var allMeals = data.meals; 
+    var oldContent = document.getElementById("displayArea");
+    oldContent.innerHTML = ""; 
 
+    if (!allMeals) {
+        oldContent.innerHTML = `<p>No meals found for the given search term. Please try again.</p>`;
+        return;
+    }
 
+    var mealsToShow = allMeals.slice(0, 5); // Show only the first 5 meals initially
+    for (var i = 0; i < mealsToShow.length; i++) {
+        var newDiv = document.createElement("div");
+        newDiv.classList.add("meal-card");
+        newDiv.innerHTML = `
+            <strong>Meal Title:</strong> ${mealsToShow[i].strMeal} <br>
+            <strong>ID:</strong> ${mealsToShow[i].idMeal} <br>
+            <img src="${mealsToShow[i].strMealThumb}" alt="${mealsToShow[i].strMeal}"> <br>
+            <strong>Cooking Instructions:</strong> <br>
+            <div class="meal-instructions">
+                ${mealsToShow[i].strInstructions}
+            </div>
+        `;
+        oldContent.appendChild(newDiv);
+    }
+
+}
