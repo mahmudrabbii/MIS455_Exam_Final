@@ -8,12 +8,25 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <header class="bg-success text-white py-4 text-center">
+        <h1>Cook Your Meal</h1>
+    </header>
+    <main class="container mt-4">
+        <div class="text-center">
+            <div class="form-group">
+                <label for="searchBox" class="h4">Search for a Meal:</label><br>
+                <input id="searchBox" type="text" class="form-control w-50 mx-auto my-2" placeholder="Type a meal name e.g: Beef, Chicken, Pasta" required>
+            </div>
+            <button class="btn btn-success" onclick="connect()">Search</button>
+        </div>
+        <div id="displayArea" class="meal-cards-container mt-4"></div>
+    </main>
+    <footer class="bg-success text-white text-center py-2">
+        <p>&copy; 2025 Meal Finder. All rights reserved.</p>
+    </footer>
 
     
-
-
     <script src="script.js"></script>
 </body>
 </html>
